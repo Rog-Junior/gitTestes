@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Kyou</title>
+</head>
+<body>
+    <h1 class="Title">Seja bem vindo ao <span>GitKyou</span></h1>
+    <input type="text" placeholder="informe o diretório" id="Path" /> <button onclick="ChangePath()">Change</button>
+    <p id="pathInform">- Ainda não informou o diretório -</p>  
+    
+    <button onclick="GitStatus()">GitStatus()</button>
+    <button onclick="GitClone()">GitClone()</button>
+    <button onclick="GitPull()">GitPull()</button>
+    <div> <p id="DebugMessage"></p>
+    </div>
+    <script src="../eel.js"></script>
+    <script>
+        
+        const debugMessage = document.getElementById("DebugMessage");
+    
+    
+
+        function ChangePath(){
+
+            if(document.getElementById("Path").value === ""){
+                document.getElementById("pathInform").innerHTML = `- Ainda não informou o diretório -`
+            }else{
+                document.getElementById("pathInform").innerHTML = `Você alterou o diretório para: ${document.getElementById("Path").value}`
+            }
+            eel.ChangePathPy(document.getElementById("Path").value)(DebugMessage);
+        }
+        function GitPull(){
+            eel.GitPull()(DebugMessage);
+        }
+        function GitStatus(){
+            eel.GitStatus()(DebugMessage);
+        }
+        function GitClone(){
+            eel.GitClone()(DebugMessage);
+        }
+        function DebugMessage(callback){ // CallBack Return...
+            console.log(callback);
+            debugMessage.innerHTML = callback;
+        }
+    </script>
+</body>
+</html>
